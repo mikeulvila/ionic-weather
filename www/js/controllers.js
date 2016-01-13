@@ -14,7 +14,7 @@ angular.module('weather.controllers', [])
   home.search;
 
   // localStorage search history
-  home.stationIds = [];
+  home.searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || {};
 
   // update variables to model to DOM
   function updateTemp(response) {
@@ -44,6 +44,8 @@ angular.module('weather.controllers', [])
       retrieveHistory[city+','+state] = response.data.current_observation.station_id;
       // set new array to localStorage
       localStorage.setItem("searchHistory", JSON.stringify(retrieveHistory));
+      // update scope searchHistory
+      home.searchHistory = retrieveHistory;
     });
   }
 
@@ -67,5 +69,11 @@ angular.module('weather.controllers', [])
       home.apiCallLatLong(lat, long);
     });
   }
+
+  home.doRecentSearch = function (station_id) {
+    console.log("station_id", station_id);
+    $http.get("http://api.wunderground.com/api/e267054668bb5a89/conditions/forecast/q/pws:"+station_id+".json")
+    .then(updateTemp)
+    };
 
 });

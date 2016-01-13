@@ -37,6 +37,11 @@ angular.module('weather', ['ionic', 'weather.controllers', 'angular-skycons'])
     url: '/home',
     templateUrl: 'templates/home.html', 
     controller: 'homeCtrl as home'
+  })
+  .state('searchHistory', {
+    url: '/searchHistory',
+    templateUrl: 'templates/searchHistory.html', 
+    controller: 'homeCtrl as home'
   });
 
   // if none of the above states are matched, use this as the fallback
