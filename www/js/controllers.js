@@ -33,17 +33,17 @@ angular.module('weather.controllers', [])
     $http.get(url + 'conditions/forecast/q/' + lat + ',' + long + '.json')
     .then(updateTemp)
     .then(function (response) {
-      console.log("save to LocalStorage", response.data.current_observation.station_id);
+      console.log("save to LocalStorage", response);
       // get searchHistory key from localStorage
-      var retrieveHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
+      var retrieveHistory = JSON.parse(localStorage.getItem("searchHistory")) || {};
       console.log("retrieveHistory", retrieveHistory);
-      // make id unique
-      if (retrieveHistory.indexOf(response.data.current_observation.station_id) === -1) {
-        // push new station_id to stationIds
-        retrieveHistory.push(response.data.current_observation.station_id);
-        // set new array to localStorage
-        localStorage.setItem("searchHistory", JSON.stringify(retrieveHistory));
-      }
+      // setting city and state variables
+      var city = response.data.current_observation.display_location.city;
+      var state = response.data.current_observation.display_location.state;
+      // set new key value to retrieveHistory object
+      retrieveHistory[city+','+state] = response.data.current_observation.station_id;
+      // set new array to localStorage
+      localStorage.setItem("searchHistory", JSON.stringify(retrieveHistory));
     });
   }
 
