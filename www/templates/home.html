@@ -5,15 +5,15 @@
 <ion-pane>
   <ion-content>
     <div class="list card">
-    	<div class="item item-input-inset">
+    	<form class="item item-input-inset" ng-submit="home.doSearch()">
 		  <label class="item-input-wrapper">
 		    <i class="icon ion-ios-search placeholder-icon"></i>
 		    <input ng-model="home.search" type="search" placeholder="Search">
 		  </label>
-		  <button ng-click="home.doSearch()" class="button button-balanced">
+		  <button class="button button-balanced">
 		    Search
 		  </button>
-		</div>
+		</form>
 		<div class="item item-body">
 			<h1>{{home.city}}, {{home.state}}</h1>
 			<h1>{{home.temp}}°F</h1>
@@ -21,6 +21,18 @@
 			<p>
 				{{home.summary}}
 			</p>
+		</div>
+		<div class="list">
+
+		  <label class="item item-input item-select">
+		    <div class="input-label">
+		      Search History
+		    </div>
+		    <select ng-model="selected" ng-options="key for (key, value) in home.searchHistory">
+
+		    </select>
+		  </label>
+
 		</div>
 
 		<div class="list" ng-repeat="(key, value) in home.searchHistory">
