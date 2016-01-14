@@ -5,7 +5,7 @@
 <ion-pane>
   <ion-content>
     <div class="list" ng-repeat="(key, value) in home.searchHistory">
-        <a class="item" ng-click="home.doRecentSearch()" href="#/home/{{value}}">{{key}}</a>
+        <a class="item" href="#/home/{{value}}">{{key}}</a>
     </div>
   </ion-content>
 </ion-pane>

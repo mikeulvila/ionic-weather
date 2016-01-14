@@ -45,7 +45,7 @@ angular.module('weather', ['ionic', 'weather.controllers', 'angular-skycons'])
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('home');
+  $urlRouterProvider.otherwise('/home/autoip');
 
 });
 

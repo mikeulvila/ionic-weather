@@ -69,11 +69,21 @@ angular.module('weather.controllers', [])
       home.apiCallLatLong(lat, long);
     });
   }
-console.log("station_id OUT", $stateParams.station_id);
-  home.doRecentSearch = function () {
-    console.log("station_id", $stateParams.station_id);
-    // $http.get("http://api.wunderground.com/api/e267054668bb5a89/conditions/forecast/q/pws:"+station_id+".json")
-    // .then(updateTemp)
-    };
+
+  // load page with either autoip or stateParam id
+  console.log("$stateParams", $stateParams.station_id);
+  if ($stateParams.station_id === 'autoip') {
+    console.log("autoip");
+     $http.get(url+'conditions/forecast/q/autoip.json').then(updateTemp);
+  } else if ($stateParams.station_id) {
+    $http.get("http://api.wunderground.com/api/e267054668bb5a89/conditions/forecast/q/pws:"+$stateParams.station_id+".json")
+    .then(updateTemp);
+
+  }
+  // home.doRecentSearch = function () {
+  //   console.log("station_id", $stateParams.station_id);
+  //   // $http.get("http://api.wunderground.com/api/e267054668bb5a89/conditions/forecast/q/pws:"+station_id+".json")
+  //   // .then(updateTemp)
+  //   };
 
 });
