@@ -1,6 +1,6 @@
 angular.module('weather.controllers', [])
 
-.controller('homeCtrl', function($http) {
+.controller('homeCtrl', function($http, $stateParams) {
   var home = this;
   var apiKey = 'e267054668bb5a89';
   var url = 'http://api.wunderground.com/api/' + apiKey + '/';
@@ -50,7 +50,7 @@ angular.module('weather.controllers', [])
   }
 
   // api call using ip address
-  $http.get(url+'conditions/forecast/q/autoip.json').then(updateTemp);
+  //$http.get(url+'conditions/forecast/q/autoip.json').then(updateTemp);
 
   // navigator.geolocation.getCurrentPosition(function (geopos) {
   //   var lat = geopos.coords.latitude;
@@ -69,11 +69,11 @@ angular.module('weather.controllers', [])
       home.apiCallLatLong(lat, long);
     });
   }
-
-  home.doRecentSearch = function (station_id) {
-    console.log("station_id", station_id);
-    $http.get("http://api.wunderground.com/api/e267054668bb5a89/conditions/forecast/q/pws:"+station_id+".json")
-    .then(updateTemp)
+console.log("station_id OUT", $stateParams.station_id);
+  home.doRecentSearch = function () {
+    console.log("station_id", $stateParams.station_id);
+    // $http.get("http://api.wunderground.com/api/e267054668bb5a89/conditions/forecast/q/pws:"+station_id+".json")
+    // .then(updateTemp)
     };
 
 });
