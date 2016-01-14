@@ -50,7 +50,7 @@ angular.module('weather.controllers', [])
   }
 
   // api call using ip address
-  $http.get(url+'conditions/forecast/q/autoip.json').then(updateTemp);
+  // $http.get(url+'conditions/forecast/q/autoip.json').then(updateTemp);
 
   // navigator.geolocation.getCurrentPosition(function (geopos) {
   //   var lat = geopos.coords.latitude;
